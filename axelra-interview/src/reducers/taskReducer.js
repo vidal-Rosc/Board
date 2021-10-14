@@ -1,42 +1,46 @@
-import {
-    ADD_TASK_SUCCESS,
-    ADD_TASK_ERROR,
-    DELETE_TASK,
-    SHOW_TASKS
-} from '../types';
+import {TYPES} from "../actions";
 
-//Every reducer has its own state :)
+
+
+//static ID ( this will come from BBD) if I get time :(
+let hardID = 2;
+let taskID = 4;
+
 const initialState = [
     {
         id: 0,
-        title: "First Task",
+        title: "In Progress",
         cards: [
             {
                 id: 0,
-                deal: "Creating a board now :)"
+                deal: "bla bla bla"
             },
             {
                 id: 1,
-                deal: "Trying to make this shit work"
+                deal: "conditional button"
+            },
+            {
+                id: 3,
+                deal: "Styling main buttons"
             },
         ],
     },
 
     {
         id: 1,
-        title: "Second Task",
+        title: "Done",
         cards: [
             {
                 id: 0,
-                deal: "Creating the In progress Board"
+                deal: "Creating the In-progress Board"
             },
             {
                 id: 1,
                 deal: "Adding some css"
             },
             {
-                id: 2,
-                deal: "Getting fucking tired of thinking"
+                id: 3,
+                deal: "Not done :("
             },
         ],
     }
@@ -45,6 +49,33 @@ const initialState = [
 
 export default function(state = initialState, action) {
     switch(action.type) {
+        case  TYPES.ADD_LIST:
+            const newList = {
+                title: action.payload,
+                cards: [],
+                id: hardID,
+            }
+            hardID += 1;
+            return [...state, newList];
+
+        case TYPES.ADD_TASK:
+            const newTask = {
+                deal: action.payload.deal,
+                id: taskID
+            }
+            taskID += 1;
+
+            const newState = state.map(list => {
+                if(list.id === action.payload.listID){
+                    return {
+                        ...list,
+                        cards: [...list.cards,  newTask]
+                    };    
+                }else {
+                    return list;
+                }
+            });
+            return newState
         default:
             return state;
     }

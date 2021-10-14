@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TaskList from "./TaskList";
 import { connect } from "react-redux";
 import app from "../app.css";
+import AddButtonOrForm from "./Buttons/AddButtonOrForm";
 
 
 
@@ -21,8 +22,11 @@ function App({list}) {
   return (
     <div className="app">
         <Container>
-          {list.map(lista =>(<TaskList key={lista.id} title={lista.title} cards={lista.cards} />))}
+          {list.map(lista =>(<TaskList key={lista.id} 
+          title={lista.title} cards={lista.cards} listID={list.id} />))}
+          <AddButtonOrForm list />
         </Container>
+        
     </div>
   );
 }

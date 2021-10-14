@@ -9,11 +9,11 @@ const CardContainer = styled(Card)`
 `;
 
 
-const TaskCard = ({description}) => {
+const TaskCard = ({text}) => {
     return ( 
         <CardContent>
             <CardContainer>
-                <Typography gutterBottom>{description}</Typography>
+                <Typography gutterBottom>{text}</Typography>
             </CardContainer>
         </CardContent>
         
